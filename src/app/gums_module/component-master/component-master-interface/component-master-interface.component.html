@@ -1,0 +1,190 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <div class="flex items-center" mat-dialog-title>
+    <h2 class="headline m-0 flex-auto">Component Master Setup</h2>
+    <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+      <mat-icon svgIcon="mat:close"></mat-icon>
+    </button>
+  </div>
+
+  <mat-divider class="-mx-6 text-border"></mat-divider>
+
+  <mat-dialog-content class="flex flex-col">
+    <div class="flex flex-col sm:flex-row">
+      <div>
+        <mat-form-field class="mt-2  flex-auto" appearance="outline">
+          <mat-label>Application Name</mat-label>
+          <mat-select formControlName="applicationUniqueId">
+            <!-- dropdown options -->
+            <mat-option *ngFor="let option of Application" [value]="option.value" (keydown.enter)="prevent($event)"
+              [ngClass]="{ 'is-invalid': submitted && f.applicationUniqueId.errors }">{{ option.label }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngIf="submitted || f['applicationUniqueId'].touched && f['applicationUniqueId'].invalid">
+          <div *ngIf="f['applicationUniqueId'].errors && f['applicationUniqueId'].errors['required']"
+            style="color:red;">
+            Enter Application Name
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <mat-form-field class="mt-2 sm:ml-2 flex-auto " appearance="outline">
+          <mat-label>Component Id</mat-label>
+          <input cdkFocusInitial formControlName="componentId" matInput (keydown.enter)="prevent($event)"
+            [ngClass]="{ 'is-invalid': submitted && f.componentId.errors }">
+          <div *ngIf="submitted || f['componentId'].touched && f['componentId'].invalid">
+            <div *ngIf="f['componentId'].errors && f['componentId'].errors['required']" style="color:red;">
+              Enter Component Id
+            </div>
+          </div>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field class="mt-2 sm:ml-2 flex-auto " appearance="outline">
+          <mat-label>Component Name</mat-label>
+          <input cdkFocusInitial formControlName="componentName" matInput (keydown.enter)="prevent($event)"
+            [ngClass]="{ 'is-invalid': submitted && f.componentName.errors }">
+          <div *ngIf="submitted || f['componentName'].touched && f['componentName'].invalid">
+            <div *ngIf="f['componentName'].errors && f['componentName'].errors['required']" style="color:red;">
+              Enter Component Name
+            </div>
+          </div>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div class="flex flex-col sm:flex-row">
+      <div>
+        <mat-form-field class="mt-2  flex-auto" appearance="outline">
+          <mat-label>Component Type</mat-label>
+          <mat-select formControlName="componentType">
+            <!-- dropdown options -->
+            <mat-option *ngFor="let option of ComponentType" [value]="option.value" (keydown.enter)="prevent($event)"
+              [ngClass]="{ 'is-invalid': submitted && f.componentType.errors }">{{ option.label }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngIf="submitted || f['componentType'].touched && f['componentType'].invalid">
+          <div *ngIf="f['componentType'].errors && f['componentType'].errors['required']" style="color:red;">
+            Enter Component Type
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sm:ml-1.5 px-5 py-3  items-end gap-6">
+          <mat-slide-toggle color="primary" formControlName="passwordRequired" matTooltip="passwordRequired">Password
+            Required</mat-slide-toggle>
+        </div>
+        <div *ngIf="submitted || f['passwordRequired'].touched && f['passwordRequired'].invalid">
+          <div *ngIf="f['passwordRequired'].errors && f['passwordRequired'].errors['required']" style="color:red;">
+            Enter Password Required
+          </div>
+        </div>
+      </div>
+      <div>
+        <mat-form-field class="mt-2  flex-auto" appearance="outline">
+          <mat-label>Password Value</mat-label>
+          <input type="password" cdkFocusInitial formControlName="passwordValue" matInput
+            (keydown.enter)="prevent($event)" [ngClass]="{ 'is-invalid': submitted && f.passwordValue.errors }">
+          <div *ngIf="submitted || f['passwordValue'].touched && f['passwordValue'].invalid">
+            <div *ngIf="f['passwordValue'].errors && f['passwordValue'].errors['required']" style="color:red;">
+              Enter Password Value
+            </div>
+          </div>
+        </mat-form-field>
+
+      </div>
+
+      <!-- <div>
+          <div  class="sm:ml-6 flex-auto  px-5 py-3 items-end gap-6">
+            <mat-slide-toggle  color="primary" formControlName="dualPasswordRequired" matTooltip="DualPasswordRequired">DualPasswordRequired</mat-slide-toggle>
+          </div>
+            <div *ngIf="submitted || f['dualPasswordRequired'].touched && f['dualPasswordRequired'].invalid">
+              <div *ngIf="f['dualPasswordRequired'].errors && f['dualPasswordRequired'].errors['required']" style="color:red;">
+                 Enter Dual Password Required
+              </div>
+            </div>
+          </div> -->
+    </div>
+
+    <div class="flex flex-col sm:flex-row">
+      <div>
+        <mat-form-field class="mt-2  flex-auto" appearance="outline">
+          <mat-label>Start Time</mat-label>
+          <input cdkFocusInitial formControlName="startTime" matInput (keydown.enter)="prevent($event)"
+            [ngClass]="{ 'is-invalid': submitted && f.startTime.errors }">
+          <div *ngIf="submitted || f['startTime'].touched && f['startTime'].invalid">
+            <div *ngIf="f['startTime'].errors && f['startTime'].errors['required']" style="color:red;">
+              Enter Start Time
+            </div>
+          </div>
+        </mat-form-field>
+
+      </div>
+
+      <div>
+        <mat-form-field class="mt-2 sm:ml-2 flex-auto " appearance="outline">
+          <mat-label>Stop Time</mat-label>
+          <input cdkFocusInitial formControlName="stopTime" matInput (keydown.enter)="prevent($event)"
+            [ngClass]="{ 'is-invalid': submitted && f.stopTime.errors }">
+          <div *ngIf="submitted || f['stopTime'].touched && f['stopTime'].invalid">
+            <div *ngIf="f['stopTime'].errors && f['stopTime'].errors['required']" style="color:red;">
+              Enter Stop Time
+            </div>
+          </div>
+        </mat-form-field>
+
+      </div>
+      <div>
+        <mat-form-field class="mt-2 sm:ml-2 flex-auto " appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="activeFlag">
+            <!-- dropdown options -->
+            <mat-option *ngFor="let option of StatusFlag" [value]="option.value" (keydown.enter)="prevent($event)"
+              [ngClass]="{ 'is-invalid': submitted && f.activeFlag.errors }">{{ option.label }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngIf="submitted || f['activeFlag'].touched && f['activeFlag'].invalid">
+          <div *ngIf="f['activeFlag'].errors && f['activeFlag'].errors['required']" style="color:red;">
+            Enter Status
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row">
+      <div class="px-5 py-3 items-end gap-6">
+        <mat-slide-toggle color="primary" formControlName="dualPasswordRequired" matTooltip="DualPasswordRequired">Dual
+          Password Req</mat-slide-toggle>
+      </div>
+      <div class="sm:ml-6 flex-auto  px-5 py-3 items-end gap-6">
+        <mat-slide-toggle color="primary" formControlName="addition" matTooltip="Addition">Addition</mat-slide-toggle>
+      </div>
+      <div class="sm:ml-6 flex-auto  px-5 py-3 items-end gap-6">
+        <mat-slide-toggle color="primary" formControlName="edit" matTooltip="Edit">Edit</mat-slide-toggle>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row">
+      <div class=" px-5 py-3 items-end gap-6">
+        <mat-slide-toggle color="primary" formControlName="enquiry" matTooltip="enquiry">Enquiry</mat-slide-toggle>
+      </div>
+      <div class="sm:ml-9 flex-auto px-5 py-3 items-end gap-6" style="padding-left: 80px;">
+        <mat-slide-toggle color="primary" formControlName="runFromDr" matTooltip="runFromDr">Run From
+          Dr</mat-slide-toggle>
+      </div>
+
+      <div class="flex-auto px-5 py-3 items-end gap-6" style="padding-right: 30px;">
+
+      </div>
+    </div>
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)=" onReset()" type="button">Clear</button>
+    <button *ngIf="isCreateMode()" color="primary" mat-flat-button type="submit">Save</button>
+    <button *ngIf="isUpdateMode()" color="primary" mat-flat-button type="submit">Modify</button>
+  </mat-dialog-actions>
+</form>

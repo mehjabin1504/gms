@@ -1,0 +1,17 @@
+<div [class.container]="isVerticalLayout$ | async" class="toolbar w-full px-gutter flex items-center">
+  <button (click)="openSidenav()" [class.hidden]="!mobileQuery" mat-icon-button type="button">
+    <mat-icon svgIcon="mat:menu"></mat-icon>
+  </button>
+
+  <a *ngIf="isVerticalLayout$ | async"
+     [routerLink]="['/']"
+     class="ltr:mr-4 rtl:ml-4 block flex items-center">
+    <!-- <img alt="Logo" class="w-8 select-none" src="assets/img/demo/logo.svg"/>  -->
+    <!-- Sabbir -->
+    <h1 [class.hidden]="!mobileQuery" class="title ltr:pl-4 rtl:pr-4 m-0 select-none">GUMS</h1>
+  </a>
+
+</div>
+
+<vex-navigation *ngIf="(isVerticalLayout$ | async) && isNavbarBelowToolbar$ | async"
+                [class.hidden]="mobileQuery"></vex-navigation>

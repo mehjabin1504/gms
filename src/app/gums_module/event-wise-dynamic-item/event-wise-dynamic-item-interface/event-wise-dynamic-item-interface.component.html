@@ -1,0 +1,137 @@
+<form  [formGroup]="form"  class="h-96">
+    <div class="flex items-center" mat-dialog-title>
+
+      <h2 class="headline m-0 flex-auto">Event Wise Dynamic Item Setup</h2>  
+      <button class="text-secondary" mat-dialog-close mat-icon-button type="button" (click)="Submit()" matTooltip="Save">
+        <mat-icon svgIcon="mat:save"></mat-icon>
+      </button>
+      <button class="text-secondary" mat-dialog-close mat-icon-button type="button"  matTooltip="Close">
+        <mat-icon svgIcon="mat:close"></mat-icon>
+      </button>
+    </div>
+  
+    <mat-divider class="-mx-6 text-border"></mat-divider>
+  
+    <mat-dialog-content class="flex flex-col">
+        <div class="flex flex-col sm:flex-row">
+            <mat-form-field class="mt-6  flex-auto" appearance="outline">
+                <mat-label>Application Name</mat-label>
+                  <mat-select formControlName="applicationUniqueId">
+                    <!-- dropdown options -->
+                    <mat-option *ngFor="let option of Application" [value]="option.value" 
+                      (keydown.enter)="prevent($event)"
+                      [ngClass]="{ 'is-invalid': submitted && f.applicationUniqueId.errors }">{{ option.label }}</mat-option>
+                  </mat-select>  
+            </mat-form-field>
+            <mat-form-field class="mt-6 sm:ml-6 flex-auto " appearance="outline">
+                <mat-label>Item Data Type</mat-label>
+                <input cdkFocusInitial formControlName="itemUniqueDataType" matInput>  
+            </mat-form-field>
+            <mat-form-field class="mt-6  sm:ml-6 flex-auto " appearance="outline">
+                <mat-label>Email</mat-label>
+                <input cdkFocusInitial formControlName="email" matInput>  
+            </mat-form-field>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row">
+            <mat-form-field class="flex-auto" appearance="outline">
+                <mat-label >Component Name</mat-label>
+                <mat-select formControlName="componentUniqueId">
+                    <!-- dropdown options -->
+                    <mat-option *ngFor="let option of componentName" [value]="option.value">{{ option.label }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="sm:ml-6 flex-auto" appearance="outline">
+                <mat-label>Item Level</mat-label>
+                <input cdkFocusInitial formControlName="itemLevel" matInput>  
+            </mat-form-field>
+            <mat-form-field class="sm:ml-6 flex-auto" appearance="outline">
+                <mat-label>Max Length</mat-label>
+                <input cdkFocusInitial formControlName="maxLength" matInput>  
+            </mat-form-field>
+        </div>
+        <div class="flex flex-col sm:flex-row">
+            <mat-form-field class="flex-auto" appearance="outline">
+                <mat-label>Event Name</mat-label>
+                <mat-select formControlName="eventUniqueId">
+                    <!-- dropdown options -->
+                    <mat-option *ngFor="let option of eventName" [value]="option.value">{{ option.label }}</mat-option>
+                </mat-select> 
+            </mat-form-field>
+            <mat-form-field class="sm:ml-6 flex-auto" appearance="outline">
+                <mat-label>Max Number</mat-label>
+                <input cdkFocusInitial formControlName="maxNumber" matInput>  
+            </mat-form-field>
+            <mat-form-field class="sm:ml-6 flex-auto" appearance="outline">
+                <mat-label>Min Length</mat-label>
+                <input cdkFocusInitial formControlName="minLength" matInput>  
+            </mat-form-field>           
+        </div>
+        <div class="flex flex-col sm:flex-row">
+            <mat-form-field class="flex-auto" appearance="outline">
+                <mat-label>Item ID</mat-label>
+                <input cdkFocusInitial formControlName="itemId" matInput>  
+            </mat-form-field>
+            <mat-form-field class="sm:ml-6 flex-auto" appearance="outline">
+                <mat-label>Min Number</mat-label>
+                <input cdkFocusInitial formControlName="minNumber" matInput>  
+            </mat-form-field>
+            <mat-form-field class="sm:ml-6 flex-auto" appearance="outline">
+                <mat-label>Pattern</mat-label>
+                <input cdkFocusInitial formControlName="pattern" matInput>  
+            </mat-form-field>
+        </div>
+        <div class="flex flex-col sm:flex-row">
+            <mat-form-field class="flex-auto" appearance="outline">
+                <mat-label>Item Name</mat-label>
+                <input cdkFocusInitial formControlName="itemName" matInput>  
+            </mat-form-field>
+            <mat-form-field class="sm:ml-6 flex-auto" appearance="outline">
+                <mat-label>Required</mat-label>
+                <input cdkFocusInitial formControlName="required" matInput>  
+            </mat-form-field>
+            <mat-form-field class="sm:ml-6 flex-auto" appearance="outline">
+                <mat-label>Pattern Expresion</mat-label>
+                <input cdkFocusInitial formControlName="patternExpresion" matInput>  
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+  
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close type="button">Cancel</button>
+      <button  mat-button type="button" *ngIf="isCreateMode()" color="primary" (click)="addContractInfo(form.value)">ADD </button>
+      <button *ngIf="isUpdateMode()" color="primary" mat-flat-button type="submit">Update </button>
+    </mat-dialog-actions>
+
+    <div  [hidden]="gridView">
+        <mat-dialog-content class="flex flex-col" style="margin-top: 30px;" >
+
+            <div class="flex items-center" mat-dialog-title>
+    
+                <h2 class="headline m-0 flex-auto">Event Wise Dynamic Item List</h2>
+            </div>
+    
+            <table>
+                <tr>
+                    <th>Application Name</th>
+                    <th>Component Name</th>
+                    <th>Event Name</th>
+                    <th>Item Name</th>
+                    <th>Item Type</th>
+                    <th>Action</th>
+                </tr>
+                <tr *ngFor="let item of itemArr; let i = index">
+                    <td style="text-align: center;">{{ item.applicationId}}</td>
+                    <td style="text-align: center;">{{ item.componentId}}</td>
+                    <td style="text-align: center;">{{ item.eventId}}</td>
+                    <td style="text-align: center;">{{ item.itemName}}</td>
+                    <td style="text-align: center;">{{ item.itemDataType}}</td>
+    
+                    <td style="text-align: center;">
+                        <mat-icon (click)="onDeleteItem(i)" svgIcon="mat:delete"  matTooltip="Delete"></mat-icon>                   
+                    </td>
+                </tr>
+            </table>
+        </mat-dialog-content>
+    </div> 
+  </form>

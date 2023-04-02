@@ -1,0 +1,67 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="flex items-center" mat-dialog-title>
+  
+      <h2 class="headline m-0 flex-auto">Data Type Setup</h2>
+      <button class="text-secondary" mat-dialog-close mat-icon-button type="button" matTooltip="Close">
+        <mat-icon svgIcon="mat:close"></mat-icon>
+      </button>
+    </div>
+  
+    <mat-divider class="-mx-6 text-border"></mat-divider>
+  
+    <mat-dialog-content class="flex flex-col mt-6">
+      <div class="flex flex-col sm:flex-row">
+        <mat-form-field class="sm:ml-6 flex-auto " appearance="outline">
+            <mat-label>Data Type</mat-label>
+            <input cdkFocusInitial formControlName="dataType" matInput (keydown.enter)="prevent($event)"
+            [ngClass]="{ 'is-invalid': submitted && f.dataType.errors }">
+            <div *ngIf="submitted || f['dataType'].touched && f['dataType'].invalid">
+                <div *ngIf="f['dataType'].errors && f['dataType'].errors['required']" style="color:red;">
+                   Enter Data Type
+                </div>
+            </div>
+        </mat-form-field>
+        <mat-form-field class=" sm:ml-6 flex-auto" appearance="outline">
+            <mat-label>Max Length</mat-label>
+            <input type="number" cdkFocusInitial formControlName="maxLength" matInput (keydown.enter)="prevent($event)"
+            [ngClass]="{ 'is-invalid': submitted && f.maxLength.errors }">
+            <div *ngIf="submitted || f['maxLength'].touched && f['maxLength'].invalid">
+                <div *ngIf="f['maxLength'].errors && f['maxLength'].errors['required']" style="color:red;">
+                   Enter Max Length
+                </div>
+            </div>
+        </mat-form-field>
+        <mat-form-field class=" sm:ml-6 flex-auto" appearance="outline">
+            <mat-label>Min Length</mat-label>
+            <input type="number" cdkFocusInitial formControlName="minLength" matInput (keydown.enter)="prevent($event)"
+            [ngClass]="{ 'is-invalid': submitted && f.minLength.errors }">
+            <div *ngIf="submitted || f['minLength'].touched && f['minLength'].invalid">
+                <div *ngIf="f['minLength'].errors && f['minLength'].errors['required']" style="color:red;">
+                   Enter Min Length
+                </div>
+            </div>
+        </mat-form-field>
+      </div>
+      <mat-form-field class="sm:ml-6 flex-auto" appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="activeFlag">
+            <!-- dropdown options -->
+            <mat-option *ngFor="let option of StatusFlag" [value]="option.value" 
+            (keydown.enter)="prevent($event)"
+            [ngClass]="{ 'is-invalid': submitted && f.activeFlag.errors }">{{ option.label }}</mat-option>
+        </mat-select>
+        <div *ngIf="submitted || f['activeFlag'].touched && f['activeFlag'].invalid">
+            <div *ngIf="f['activeFlag'].errors && f['activeFlag'].errors['required']"
+                style="color:red;">
+                Enter Status
+            </div>
+        </div>
+        </mat-form-field>
+    </mat-dialog-content>
+  
+    <mat-dialog-actions align="end">
+      <button mat-button (click)=" onReset()" type="button">Clear</button>
+      <button mat-button type="button" *ngIf="isCreateMode()" color="primary"  mat-flat-button type="submit">Submit</button>
+      <button mat-button *ngIf="isUpdateMode()" color="primary"  mat-flat-button type="submit">Modify</button>
+    </mat-dialog-actions>
+  </form>

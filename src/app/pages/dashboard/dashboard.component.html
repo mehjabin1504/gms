@@ -1,0 +1,11 @@
+<div class="container p-gutter grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" style="align-content: center;">
+
+
+    <ng-container *ngFor="let column of vaccessList">
+      <a href={{column.applicationUrl}} target="_blank" > <vex-widget-quick-value-center icon="mat:event_available" iconClass="text-primary bg-primary/10"
+            label={{column.applicationName}}></vex-widget-quick-value-center></a>
+    </ng-container>
+
+
+
+</div>

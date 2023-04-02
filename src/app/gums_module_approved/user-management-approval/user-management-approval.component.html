@@ -1,0 +1,93 @@
+
+
+<vex-page-layout>
+  <vex-page-layout-header class="flex flex-col items-start ">
+    <div [class.container]="layoutCtrl.value === 'boxed'"
+         [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+         class="w-full flex flex-col sm:flex-row justify-between">
+      <div>
+        <h1 class="title mt-0 mb-1">User Management Approval</h1>
+        <vex-breadcrumbs [crumbs]="['Approve Page', 'User Management Approval']"></vex-breadcrumbs>
+      </div>
+    </div>
+  </vex-page-layout-header>  
+  <vex-page-layout-content class="-mt-6">
+    <form [formGroup]="form">
+      <div class="card overflow-auto -mt-16 "> 
+        <div class="bg-app-bar px-6 h-16 border-b sticky left-0 flex items-center ">
+          
+          <div class="bg-foreground rounded-full border px-4 max-w-[300px] flex-auto flex items-center border border-gray-300">
+            <mat-icon class="icon-sm text-secondary" svgIcon="mat:search"></mat-icon>
+            <input [formControl]="searchCtrl"
+                   class="px-4 py-2 border-0 outline-none w-full bg-transparent"
+                   placeholder="Search..."
+                   type="search">
+          </div>
+  
+          <span class="flex-1"></span>
+
+          <button class="text-secondary" mat-dialog-close mat-icon-button type="button" 
+           matTooltip="Save" (click)="DataInsertApi()">
+            <mat-icon svgIcon="mat:save"></mat-icon>
+          </button>
+  
+          <button [matMenuTriggerFor]="columnFilterMenu"
+                  class="ml-4 flex-none"
+                  mat-icon-button
+                  matTooltip="Filter Columns"
+                  type="button">
+            <mat-icon svgIcon="mat:filter_list"></mat-icon>
+          </button>
+        </div>
+  
+        <table  [dataSource]="dataSource" class="w-full" mat-table matSort>
+          <ng-container *ngFor="let column of columns; trackBy: trackByProperty">
+            <ng-container *ngIf="column.type === 'text'" [matColumnDef]="column.property">
+              <th *matHeaderCellDef class="uppercase" mat-header-cell mat-sort-header> {{ column.label }}</th>
+              <td *matCellDef="let row" [ngClass]="column.cssClasses" mat-cell>{{ row[column.property] }}</td>
+            </ng-container>
+          </ng-container>
+
+          <ng-container matColumnDef="showDetails">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header class="uppercase">Show Details</th>
+            <td *matCellDef="let row" mat-cell>
+              <div class="flex">
+                <button mat-raised-button type="button" (click)="OldValueDialog(row)" color="primary" matTooltip="Show Old Value">Show Details</button>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="approvalStatus" >
+            <th *matHeaderCellDef mat-header-cell mat-sort-header class="uppercase">Approval Status</th>
+            <td *matCellDef="let row" mat-cell >
+              <mat-radio-group class="flex gap-4" color="accent" (change)="ValueGet($event.value,row)">
+                <mat-radio-button  color="primary" name="approvalStatus"  value="Approve">Approve
+                </mat-radio-button>
+                <mat-radio-button  color="primary" name="approvalStatus"  value="Reject">Reject
+                </mat-radio-button>
+                <mat-radio-button [checked]="true" color="primary" name="approvalStatus"  value="Pending">Pending
+                </mat-radio-button>
+              </mat-radio-group>
+            </td>
+          </ng-container>
+
+          <tr *matHeaderRowDef="visibleColumns" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: visibleColumns;"                
+              class="hover:bg-hover trans-ease-out cursor-pointer"
+              mat-row></tr>  
+        </table>    
+        <mat-paginator [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize" class="sticky left-0 "></mat-paginator>
+      </div>
+    </form>            
+    </vex-page-layout-content>    
+  </vex-page-layout>
+  
+  <mat-menu #columnFilterMenu="matMenu" xPosition="before" yPosition="below">
+    <button (click)="toggleColumnVisibility(column, $event)" *ngFor="let column of columns"
+            class="checkbox-item mat-menu-item">
+      <mat-checkbox (click)="$event.stopPropagation()" [(ngModel)]="column.visible" color="primary">
+        {{ column.label }}
+      </mat-checkbox>
+    </button>
+  </mat-menu>
+  

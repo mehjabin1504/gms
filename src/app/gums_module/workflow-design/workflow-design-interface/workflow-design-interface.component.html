@@ -1,0 +1,196 @@
+
+  
+  <div  class="p-gutter container h-96">
+    <div class="flex items-center" mat-dialog-title>
+
+      <h2 class="headline m-0 flex-auto">Workflow Design</h2>  
+      <button class="text-secondary" mat-dialog-close mat-icon-button type="button" (click)=" Submit()" matTooltip="Save">
+        <mat-icon svgIcon="mat:save"></mat-icon>
+      </button>
+      <button class="text-secondary" mat-dialog-close mat-icon-button type="button"  matTooltip="Close">
+        <mat-icon svgIcon="mat:close"></mat-icon>
+      </button>
+    </div>
+    
+  
+    <div  class="card overflow-scroll">
+      <mat-horizontal-stepper #stepper="matHorizontalStepper" [linear]="true">
+        <ng-template matStepperIcon="edit">
+          <mat-icon svgIcon="mat:done_all"></mat-icon>
+        </ng-template>
+  
+        <ng-template matStepperIcon="done">
+          <mat-icon svgIcon="mat:done_all"></mat-icon>
+        </ng-template>
+  
+        <mat-step [stepControl]="masterFormGroup">
+          <form [formGroup]="masterFormGroup">
+            <ng-template matStepLabel>Workflow Master</ng-template>
+  
+            <div class="title m-0">Workflow Master</div>
+            <div class="subheading-1">Set up Workflow Master for testing purposes.</div>
+  
+            <mat-dialog-content class="flex flex-col">
+              <div class="flex flex-col sm:flex-row">
+                <mat-form-field class="mt-6  flex-auto" appearance="outline">
+                  <mat-label>Workflow Id</mat-label>
+                  <input cdkFocusInitial formControlName="workflowId" matInput >  
+                </mat-form-field>
+                <mat-form-field class="mt-6 sm:ml-6 flex-auto " appearance="outline">
+                  <mat-label>Workflow Name</mat-label>
+                  <input cdkFocusInitial formControlName="workflowName" matInput>  
+                </mat-form-field>
+                <mat-form-field class="mt-6 sm:ml-6 flex-auto " appearance="outline">
+                <mat-label>From Amount</mat-label>
+                <input type="number"  cdkFocusInitial formControlName="fromAmount" matInput>  
+                </mat-form-field> 
+              </div>
+              
+              <div class="flex flex-col sm:flex-row">
+                <mat-form-field class="flex-auto" appearance="outline">
+                  <mat-label>To Amount</mat-label>
+                  <input type="number" cdkFocusInitial formControlName="toAmount" matInput> 
+                </mat-form-field>
+                <mat-form-field class="sm:ml-6 flex-auto" appearance="outline">
+                  <mat-label>Maker Checker Level</mat-label>
+                  <input type="number" cdkFocusInitial formControlName="makerCheckerLevel" matInput>  
+                </mat-form-field>
+                <mat-form-field class="sm:ml-6 flex-auto" appearance="outline">
+                  <mat-label>Additional Checker Level</mat-label>
+                  <input type="number" cdkFocusInitial formControlName="additionalCheckerLevel" matInput>  
+                </mat-form-field>
+              </div>
+              <!-- <div class="flex flex-col sm:flex-row">
+                  <mat-form-field class="mt-6  flex-auto" appearance="outline">
+                      <mat-label>Workflow Id</mat-label>
+                      <input cdkFocusInitial formControlName="workflowId" matInput >  
+                  </mat-form-field>
+                  <mat-form-field class="mt-6 sm:ml-6 flex-auto " appearance="outline">
+                      <mat-label>Workflow Name</mat-label>
+                      <input cdkFocusInitial formControlName="workflowName" matInput>  
+                  </mat-form-field>
+                  <mat-form-field class="mt-6 sm:ml-6 flex-auto " appearance="outline">
+                    <mat-label>From Amount</mat-label>
+                    <input type="number"  cdkFocusInitial formControlName="fromAmount" matInput>  
+                  </mat-form-field>                  
+              </div> -->
+              <!-- <div class="flex flex-col sm:flex-row">
+                  <mat-form-field class="flex-auto" appearance="outline">
+                      <mat-label>From Amount</mat-label>
+                      <input type="number"  cdkFocusInitial formControlName="fromAmount" matInput>  
+                  </mat-form-field>
+                  <mat-form-field class="sm:ml-6 flex-auto" appearance="outline">
+                      <mat-label>To Amount</mat-label>
+                      <input type="number" cdkFocusInitial formControlName="toAmount" matInput>  
+                  </mat-form-field>
+              </div> -->
+              <!-- <div class="flex flex-col sm:flex-row">
+                <mat-form-field class="mt-6  flex-auto" appearance="outline">
+                  <mat-label>To Amount</mat-label>
+                  <input type="number" cdkFocusInitial formControlName="toAmount" matInput>  
+               </mat-form-field>
+                <mat-form-field class="mt-6 sm:ml-6 flex-auto" appearance="outline">
+                    <mat-label>Maker Checker Level</mat-label>
+                    <input type="number" cdkFocusInitial formControlName="makerCheckerLevel" matInput>  
+                </mat-form-field>
+                <mat-form-field class="mt-6 sm:ml-6 flex-auto" appearance="outline">
+                  <mat-label>Additional Checker Level</mat-label>
+                  <input type="number" cdkFocusInitial formControlName="additionalCheckerLevel" matInput>  
+                </mat-form-field>
+              </div> -->
+              <!-- <div class="flex flex-col sm:flex-row">
+                <mat-form-field class="flex-auto" appearance="outline">
+                    <mat-label>Additional Checker Level</mat-label>
+                    <input type="number" cdkFocusInitial formControlName="additionalCheckerLevel" matInput>  
+                </mat-form-field>
+              </div> -->
+            </mat-dialog-content>
+  
+            
+  
+            <div class="actions flex items-center justify-end gap-2">
+              <button (click)="stepper.reset()" [disabled]="masterFormGroup.pristine" color="primary" mat-button
+                      type="button">Reset
+              </button>
+              <button [disabled]="masterFormGroup.invalid" color="primary" mat-raised-button matStepperNext>Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+  
+        <mat-step [stepControl]="detailsFormGroup">
+          <form [formGroup]="detailsFormGroup">
+            <ng-template matStepLabel>Workflow Details</ng-template>
+  
+            <h2 class="title m-0">Workflow Details</h2>
+            <div class="subheading-1">Enter your Workflow Details.</div>
+  
+            <div class="mt-4 flex flex-col gap-2">
+              <mat-dialog-content class="flex flex-col">
+                <div class="flex flex-col sm:flex-row">
+                    <mat-form-field class="flex-auto" appearance="outline">
+                        <mat-label>Level Code</mat-label>
+                        <input cdkFocusInitial formControlName="makerCheckerLevel" matInput>  
+                    </mat-form-field>
+                    <mat-form-field class="sm:ml-6 flex-auto" appearance="outline">
+                      <mat-label>Roll Id</mat-label>
+                      <input cdkFocusInitial formControlName="rollId" matInput>  
+                    </mat-form-field>
+                    <mat-form-field class="sm:ml-6 flex-auto" appearance="outline">
+                      <mat-label>Teller Limit Type</mat-label>
+                      <input cdkFocusInitial formControlName="tellerLimitType" matInput>  
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col sm:flex-row">
+                    <mat-form-field class="flex-auto" appearance="outline">
+                        <mat-label>Warning Override</mat-label>
+                        <input cdkFocusInitial formControlName="warningOverride" matInput>  
+                    </mat-form-field>
+                </div>
+              </mat-dialog-content>
+              <mat-dialog-actions align="end">
+                <button mat-button mat-dialog-close type="button">Cancel</button>
+                <button  mat-button type="button" *ngIf="isCreateMode()" color="primary" (click)="addDetailsInfo(detailsFormGroup.value)">ADD </button>
+                <!-- <button  mat-button type="button" *ngIf="isCreateMode()" color="primary" mat-flat-button type="submit">Create </button> -->
+                <button  mat-button type="button" *ngIf="isUpdateMode()" color="primary" (click)="addDetailsInfo(detailsFormGroup.value)">ADD </button>
+                <!-- <button *ngIf="isUpdateMode()" color="primary" mat-flat-button type="submit">Update </button> -->
+              </mat-dialog-actions>
+            </div>
+
+
+            <div [hidden]="gridView" class="overflow: scroll">
+              <mat-dialog-content class="flex flex-col" style="margin-top: 30px;" >
+      
+                  <div class="flex items-center" mat-dialog-title>          
+                      <h2 class="headline m-0 flex-auto">Added Workflow Details List</h2>
+                  </div>
+          
+                  <table>
+                      <tr>
+                          <th>Roll Id</th>
+                          <th>Teller Limit Type</th>
+                          <th>Warning Override</th>
+                          <th>Action</th>
+                      </tr>
+                      <tr *ngFor="let item of itemArr; let i = index">
+                          <td style="text-align: center;">{{ item.rollId}}</td>
+                          <td style="text-align: center;">{{ item.tellerLimitType}}</td>
+                          <td style="text-align: center;">{{ item.warningOverride}}</td>
+          
+                          <td style="text-align: center;">
+                              <mat-icon (click)="onDeleteItem(i)" svgIcon="mat:delete"  matTooltip="Delete"></mat-icon>                   
+                          </td>
+                      </tr>
+                  </table>
+              </mat-dialog-content>
+          </div>
+
+
+          </form>
+        </mat-step>
+
+      </mat-horizontal-stepper>
+    </div> 
+   </div>
+  
+  

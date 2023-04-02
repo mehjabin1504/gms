@@ -1,0 +1,149 @@
+<form [formGroup]="form"  (ngSubmit)="onSubmit()">
+  <div class="flex items-center" mat-dialog-title>
+    <h2 class="headline m-0 flex-auto">Menu Master Setup</h2>
+    <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+      <mat-icon svgIcon="mat:close"></mat-icon>
+    </button>
+  </div>
+
+  <mat-divider class="-mx-6 text-border"></mat-divider>
+  <mat-dialog-content class="flex flex-col">
+    <div class="flex flex-col sm:flex-row">
+      <div  [hidden]=divMain>
+        <h1>What Do You Need?</h1>
+        <mat-form-field class="mt-2  flex-auto" appearance="outline">
+          <mat-label>Select List</mat-label>
+          <mat-select formControlName="programId" (selectionChange)="EventWiseSelection()">
+            <mat-option *ngFor="let option of Program" [value]="option.value">{{ option.label }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <div [hidden]=divHide>
+    <mat-dialog-content class="flex flex-col">
+      <div class="flex flex-col sm:flex-row">
+        <div>
+          <mat-form-field class="mt-2  flex-auto" appearance="outline">
+            <mat-label>Application Name</mat-label>
+            <mat-select  formControlName="applicationUniqueId">
+              <!-- dropdown options -->
+              <mat-option  *ngFor="let option of Application" [value]="option.value" (keydown.enter)="prevent($event)"
+                >{{ option.label }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- <div *ngIf="submitted || f['applicationUniqueId'].touched && f['applicationUniqueId'].invalid">
+            <div *ngIf="f['applicationUniqueId'].errors && f['applicationUniqueId'].errors['required']"
+              style="color:red;">
+              Enter Application Name
+            </div>
+          </div> -->
+        </div>
+        <div>
+          <mat-form-field class="mt-2 sm:ml-2 flex-auto " appearance="outline">
+            <mat-label>Menu Type</mat-label>
+            <mat-select formControlName="menuType" (selectionChange)=" onSelectionChangedexchange()">
+              <!-- dropdown options -->
+              <mat-option *ngFor="let option of MenuType" [value]="option.value" (keydown.enter)="prevent($event)"
+              >{{ option.label }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- <div *ngIf="submitted || f['menuType'].touched && f['menuType'].invalid">
+            <div *ngIf="f['menuType'].errors && f['menuType'].errors['required']" style="color:red;">
+              Enter Status
+            </div>
+          </div> -->
+        </div>
+        <div>
+          <mat-form-field class="mt-2 sm:ml-2 flex-auto " appearance="outline">
+            <mat-label>Component Id</mat-label>
+            <mat-select formControlName="componentUniqueId">
+              <!-- dropdown options -->
+              <mat-option *ngFor="let option of componentName" [value]="option.value">{{ option.label }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- <div *ngIf="submitted || f['componentUniqueId'].touched && f['componentUniqueId'].invalid">
+            <div *ngIf="f['componentUniqueId'].errors && f['componentUniqueId'].errors['required']" style="color:red;">
+              Enter Component Id
+            </div>
+          </div> -->
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row">
+        <div>
+          <mat-form-field class="mt-2  flex-auto" appearance="outline">
+            <mat-label>Component Name</mat-label>
+            <input  formControlName="componentName" matInput matInput (keydown.enter)="prevent($event)"
+              >
+          </mat-form-field>
+          <!-- <div *ngIf="submitted || f['componentName'].touched && f['componentName'].invalid">
+            <div *ngIf="f['componentName'].errors && f['componentName'].errors['required']" style="color:red;">
+              Enter Component Name
+            </div>
+          </div> -->
+        </div>
+        <div>
+          <mat-form-field class="mt-2 sm:ml-2 flex-auto " appearance="outline">
+            <mat-label>Parent Unique Id</mat-label>
+            <input type="number"  formControlName="parentUniqueId" matInput matInput
+              (keydown.enter)="prevent($event)" >
+          </mat-form-field>
+          <!-- <div *ngIf="submitted || f['parentUniqueId'].touched && f['parentUniqueId'].invalid">
+            <div *ngIf="f['parentUniqueId'].errors && f['parentUniqueId'].errors['required']" style="color:red;">
+              Enter Parent Unique Id
+            </div>
+          </div> -->
+        </div>
+
+        <div>
+          <mat-form-field class="mt-2 sm:ml-2 flex-auto " appearance="outline">
+            <mat-label>Level Code</mat-label>
+            <input type="number" formControlName="levelCode" matInput matInput (keydown.enter)="prevent($event)"
+              >
+          </mat-form-field>
+          <!-- <div *ngIf="submitted || f['levelCode'].touched && f['levelCode'].invalid">
+            <div *ngIf="f['levelCode'].errors && f['levelCode'].errors['required']" style="color:red;">
+              Enter Level Code
+            </div>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row">
+        <div>
+          <mat-form-field class="mt-2  flex-auto" appearance="outline">
+            <mat-label>Menu Serial</mat-label>
+            <input type="number"  formControlName="menuSerial" matInput matInput
+              (keydown.enter)="prevent($event)">
+          </mat-form-field>
+          <!-- <div *ngIf="submitted || f['menuSerial'].touched && f['menuSerial'].invalid">
+            <div *ngIf="f['menuSerial'].errors && f['menuSerial'].errors['required']" style="color:red;">
+              Enter Menu Serial
+            </div>
+          </div> -->
+        </div>
+        <div>
+          <mat-form-field class="mt-2 sm:ml-2 flex-auto " appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="activeFlag">
+              <!-- dropdown options -->
+              <mat-option *ngFor="let option of StatusFlag" [value]="option.value" (keydown.enter)="prevent($event)"
+                >{{ option.label }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- <div *ngIf="submitted || f['activeFlag'].touched && f['activeFlag'].invalid">
+            <div *ngIf="f['activeFlag'].errors && f['activeFlag'].errors['required']" style="color:red;">
+              Enter Status
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button (click)=" onReset()" type="button">Clear</button>
+      <button *ngIf="isCreateMode()" color="primary" mat-flat-button type="submit">Save</button>
+      <button *ngIf="isUpdateMode()" color="primary" mat-flat-button type="submit">Modify</button>
+    </mat-dialog-actions>
+  </div>
+</form>

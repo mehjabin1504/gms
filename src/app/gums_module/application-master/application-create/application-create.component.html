@@ -1,0 +1,99 @@
+<form  [formGroup]="form">
+    <div class="flex items-center" mat-dialog-title>
+
+      <h2 class="headline m-0 flex-auto">Application Entry</h2>  
+      <button class="text-secondary" mat-dialog-close mat-icon-button type="button" (click)="save()" matTooltip="Save">
+        <mat-icon svgIcon="mat:save"></mat-icon>
+      </button>
+      <button class="text-secondary" mat-dialog-close mat-icon-button type="button"  matTooltip="Close">
+        <mat-icon svgIcon="mat:close"></mat-icon>
+      </button>
+    </div>
+  
+    <mat-divider class="-mx-6 text-border"></mat-divider>
+  
+    <mat-dialog-content class="flex flex-col" style="margin-top: 30px;" >
+       
+        <!-- <div class="flex flex-col sm:flex-row">
+            <mat-form-field class="flex-auto" appearance="outline">
+                <mat-label>Account Type Sub Group Code </mat-label>
+                <input cdkFocusInitial formControlName="accountSubGroupCode" matInput>  
+            </mat-form-field>
+            
+        </div> -->
+
+        <div class="flex flex-col sm:flex-row">
+            <mat-form-field class="flex-auto" appearance="outline">
+                <mat-label>Application ID </mat-label>
+                <input cdkFocusInitial formControlName="appId" matInput>  
+            </mat-form-field>
+            
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+            <mat-form-field class="flex-auto" appearance="outline">
+                <mat-label>Application Name</mat-label>
+                <input cdkFocusInitial formControlName="appName" matInput>  
+            </mat-form-field>
+         
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+            <mat-form-field class="flex-auto" appearance="outline">
+                <mat-label>Purpose</mat-label>
+                <input cdkFocusInitial formControlName="purpose" matInput>  
+            </mat-form-field>
+         
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+            <mat-form-field class="flex-auto" appearance="outline">
+                <mat-label>URL</mat-label>
+                <input cdkFocusInitial formControlName="appUrl" matInput>  
+            </mat-form-field>
+         
+        </div>
+     
+    </mat-dialog-content>
+  
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close type="button">Cancel</button>
+      <button  mat-button type="button" *ngIf="isCreateMode()" color="primary" (click)="addAppInfo(form.value)" >ADD </button>
+      <button *ngIf="isUpdateMode()" color="primary" mat-flat-button type="submit">Update </button>
+    </mat-dialog-actions>
+
+    
+    <div  [hidden]="gridView">
+        <mat-dialog-content class="flex flex-col" style="margin-top: 30px;" >
+
+            <div class="flex items-center" mat-dialog-title>
+    
+                <h2 class="headline m-0 flex-auto">App List</h2>
+            </div>
+    
+            <table>
+                <tr>
+                    <!-- <th>Account Type Group Id</th> -->
+                    <th>Application ID</th>
+                    <th>Application Name</th>
+                    <th>Purpose</th>
+                    <th>URL</th>
+                </tr>
+                <tr *ngFor="let item of itemArr; let i = index">
+                    <!-- <td style="text-align: center;">{{ item.accountTypeGroupId}}</td> -->
+                    <td style="text-align: center;">{{ item.appId}}</td>
+                    <td style="text-align: center;">{{ item.appName}}</td>
+                    <td style="text-align: center;">{{ item.purpose}}</td>
+                    <td style="text-align: center;">{{ item.appUrl}}</td>
+    
+                    <td style="text-align: center;">
+                        <mat-icon (click)="onDeleteItem(i)" svgIcon="mat:delete"  matTooltip="Delete"></mat-icon>                   
+                    </td>
+                </tr>
+            </table>
+        </mat-dialog-content>
+    </div>
+
+
+   
+</form>

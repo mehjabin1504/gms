@@ -1,0 +1,63 @@
+<vex-page-layout [formGroup]="form">
+
+    <vex-page-layout-header class="flex flex-col items-start " style="height: auto;">
+        <div [class.container]="layoutCtrl.value === 'boxed'" [class.px-gutter]="layoutCtrl.value === 'fullwidth'"
+            class="w-full flex flex-col sm:flex-row justify-between">
+            <div>
+                <h1 class="title mt-0 mb-1">Menu Master</h1>
+                <vex-breadcrumbs [crumbs]="['Setup Page', 'Menu Master']"></vex-breadcrumbs>
+            </div>
+        </div>
+    </vex-page-layout-header>
+    <vex-page-layout-content  class="vex-tabs p-0 container">
+              
+        <div class="card">
+            <mat-dialog-content class="flex flex-col" style="margin-left: 30px;">  
+                <div class="flex flex-col sm:flex-row">
+                  <div>
+                    <mat-form-field class="mt-2 sm:ml-2 flex-auto " appearance="outline">
+                      <mat-label>Application Name</mat-label>
+                      <mat-select formControlName="applicationUniqueId" (selectionChange)="getMenutreeDetails()">
+                        <!-- dropdown options -->
+                        <mat-option *ngFor="let option of Application" [value]="option.value" 
+                          (keydown.enter)="prevent($event)">{{ option.label }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>      
+                  </div>   
+                </div>   
+            </mat-dialog-content> 
+            <div class="card" style="margin-top: 20px; margin-left: 40px;">
+                <div>
+                    <vex-breadcrumbs [crumbs]="['Menu Tree For Selected Application Name']"></vex-breadcrumbs>
+                </div>
+                <div [hidden]="hideButton">
+                    <button color="primary" mat-flat-button  (click)="MenuSerialGet()" style="margin: 15px;">Add Tree</button>
+                </div>
+                
+                <ng-template #nodeTemplate let-nodes="nodes" let-tree="tree">
+                    <ng-container *ngFor="let node of nodes">                        
+                        <div class="menu-node" [ngClass]=" { 'menu-node-tree' : tree }">
+                            <div (click)="toggleVisible(node)" class="menu-node-button" [ngClass]="{
+                                'menu-node-button-show': node.submenu && node.submenu.length,
+                                'menu-node-button-plus': !expand[node.index],
+                                'menu-node-button-minus': expand[node.index]
+                            }" role="button"></div>
+                            <div class="menu-node-name" [ngClass]="{
+                                'menu-node-name-selected': (node === selectedNode)
+                            }" (click)="selectNode(node)" (click)="valueGet(node.Child_Id)">{{ node.title }}</div>
+                            <ng-container *ngIf="node.submenu && node.submenu.length && expand[node.index]">
+                                <ng-template [ngTemplateOutlet]="nodeTemplate"
+                                    [ngTemplateOutletContext]="{ nodes: node.submenu, tree: true }">
+                                </ng-template>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                </ng-template>
+            </div>
+            
+
+            <ng-template [ngTemplateOutlet]="nodeTemplate" [ngTemplateOutletContext]="{ nodes: menu, tree: false }">
+            </ng-template>
+        </div>
+    </vex-page-layout-content>
+</vex-page-layout>

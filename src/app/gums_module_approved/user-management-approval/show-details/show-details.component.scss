@@ -1,0 +1,15 @@
+table { 
+    width: 100%; 
+  }
+  tr:nth-of-type(odd) { 
+    background: #eee; 
+  }
+  th { 
+    background: rgb(252, 248, 248); 
+    color: rgb(5, 5, 5); 
+    font-weight: bold; 
+  }
+  td, th {
+    border: 1px solid #ccc; 
+    text-align: center; 
+  }

@@ -1,0 +1,109 @@
+<button class="text-secondary" mat-dialog-close mat-icon-button type="button"  matTooltip="Close" style="float: right;">
+    <mat-icon svgIcon="mat:close"></mat-icon>
+  </button>
+ 
+  <div class="relative overflow-auto">
+    <div *ngIf="p_newvalue!=null">
+      <h2 class="title mb-4 flex items-center">
+        <span  class="w-10 h-10 rounded-full text-primary mr-3 flex items-center justify-center bg-primary/10">
+          <mat-icon class="icon-sm" svgIcon="mat:description"></mat-icon>
+        </span>
+        <span  class="block">New Value</span>    
+      </h2>
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+              <tr>
+                <th scope="col" class="px-6 py-3" *ngFor="let header of _object.keys(p_newvalue[0]); let i = index">{{header}}</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let row of p_newvalue; let i = index">
+              <th scope="row" class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white" *ngFor="let objKey of _object.keys(row); let j = index">{{ row[objKey] }} </th>
+            </tr>
+          </tbody>
+      </table>
+
+      <!-- <div  *ngIf="detailsObject!=null">
+        <h1 class="title mb-4 flex items-center"></h1>
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">        
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+              <tr>
+                <th scope="col" class="px-6 py-3" *ngFor="let header of _object3.keys(detailsObject[0]); let i = index">{{header}}</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let row of detailsObject; let i = index">
+              <th scope="row" class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white" *ngFor="let objKey of _object3.keys(row); let j = index">{{ row[objKey] }} </th>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+      
+    </div>
+    
+    <div *ngIf="p_oldvalue!=null">
+      <h2 class="title mt-6 mb-4 flex items-center">
+        <span  class="w-10 h-10 rounded-full text-primary mr-3 flex items-center justify-center bg-primary/10">
+          <mat-icon class="icon-sm" svgIcon="mat:description"></mat-icon>
+        </span>
+        <span  class="block">Old Value</span>    
+      </h2>
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+              <tr>
+                <th scope="col" class="px-6 py-3" *ngFor="let header2 of _object1.keys(p_oldvalue[0]); let i = index">{{header2}}</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let row2 of p_oldvalue; let i = index">
+              <th scope="row" class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"*ngFor="let objKey2 of _object1.keys(row2); let j = index">{{ row2[objKey2] }} </th>
+            </tr>
+          </tbody>
+      </table>
+
+      <!-- <div  *ngIf="detailsObject1!=null">
+        <h1 class="title mb-4 flex items-center"></h1>
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">        
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+              <tr>
+                <th scope="col" class="px-6 py-3" *ngFor="let header of _object4.keys(detailsObject1[0]); let i = index">{{header}}</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let row of detailsObject1; let i = index">
+              <th scope="row" class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white" *ngFor="let objKey of _object4.keys(row); let j = index">{{ row[objKey] }} </th>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+    </div>
+  </div>
+  
+  
+  
+  <div class="relative overflow-auto"  *ngIf="p_approval_authorities!=null">
+    <h2 class="title mt-6 mb-4 flex items-center">
+      <span  class="w-10 h-10 rounded-full text-primary mr-3 flex items-center justify-center bg-primary/10">
+        <mat-icon class="icon-sm" svgIcon="mat:description"></mat-icon>
+      </span>
+      <span  class="block">Approval Authorities</span>    
+    </h2>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+            <tr>
+              <th scope="col" class="px-6 py-3" *ngFor="let header1 of _object2.keys(p_approval_authorities[0]); let i = index">{{header1}}</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let row1 of p_approval_authorities; let i = index">
+            <th scope="row" class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white" *ngFor="let objKey1 of _object2.keys(row1); let j = index">{{ row1[objKey1] }} </th>
+          </tr>
+        </tbody>
+    </table>
+  </div>

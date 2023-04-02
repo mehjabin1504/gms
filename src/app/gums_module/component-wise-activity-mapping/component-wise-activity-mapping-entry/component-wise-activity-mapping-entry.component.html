@@ -1,0 +1,122 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="flex items-center" mat-dialog-title>
+     
+  
+      
+      <h2 class="headline m-0 flex-auto">Component Wise Activity Mapping SetUp </h2>
+  
+      <button [matMenuTriggerFor]="settingsMenu" class="text-secondary" mat-icon-button type="button">
+        <mat-icon svgIcon="mat:more_vert"></mat-icon>
+      </button>
+  
+      <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+        <mat-icon svgIcon="mat:close"></mat-icon>
+      </button>
+    </div>
+  
+    <mat-divider class="-mx-6 text-border"></mat-divider>
+
+    <!-- input Form starts -->
+  
+    <mat-dialog-content class="flex flex-col" >
+
+        <div class="mt-2 flex flex-col sm:flex-row gap-2">
+          <div>
+            <mat-form-field class="mt-2 flex-auto mat-field" appearance="outline" > 
+              <mat-label style="font-size: 14px">Component Name</mat-label>
+    
+              <mat-select formControlName="componentUniqueId"  (selectionChange)="ComponentNameListMethodByUniqueId()">
+                <!-- dropdown options -->
+                <mat-option *ngFor="let option of componentName" [value]="option.value">{{ option.label }}</mat-option>
+              </mat-select>
+              
+              
+            </mat-form-field>
+
+            <div *ngIf="submitted || f['componentUniqueId'].touched && f['componentUniqueId'].invalid">
+              <div *ngIf="f['componentUniqueId'].errors && f['componentUniqueId'].errors['required']" style="color:red;">
+                 Enter Component Name
+              </div>
+            </div>
+
+          </div>
+            
+    
+          <div>
+            <mat-form-field class="mt-2 flex-auto mat-field" appearance="outline" > 
+              <mat-label style="font-size: 14px">Activity Name</mat-label>
+    
+              <mat-select formControlName="activityUniqueId" (selectionChange)="ActivityNameListMethodByUniqueId()">
+                <!-- dropdown options -->
+                <mat-option *ngFor="let option of activityName" [value]="option.value">{{ option.label }}</mat-option>
+              </mat-select>
+              
+              
+            </mat-form-field>
+
+            <div *ngIf="submitted || f['activityUniqueId'].touched && f['activityUniqueId'].invalid">
+              <div *ngIf="f['activityUniqueId'].errors && f['activityUniqueId'].errors['required']" style="color:red;">
+                 Enter Activity Name
+              </div>
+            </div>
+
+          </div>
+      
+            
+          </div>
+
+
+          <div class="mt-2 flex flex-col sm:flex-row gap-2">
+           
+            
+    
+            <div>
+              <mat-form-field class="mt-2 flex-auto mat-field" appearance="outline" > 
+                <mat-label style="font-size: 14px">Active Flag</mat-label>
+      
+                <mat-select formControlName="activeFlag">
+                  <!-- dropdown options -->
+                  <mat-option *ngFor="let option of activeFlag" [value]="option.value">{{ option.label }}</mat-option>
+                </mat-select>
+                
+                
+              </mat-form-field>
+
+              <div *ngIf="submitted || f['activeFlag'].touched && f['activeFlag'].invalid">
+                <div *ngIf="f['activeFlag'].errors && f['activeFlag'].errors['required']" style="color:red;">
+                   Enter Active Flag
+                </div>
+              </div>
+
+            </div>
+      
+            
+          </div>
+  </mat-dialog-content>
+
+    <!-- input Form ends -->
+  
+    <mat-dialog-actions align="end">
+      <button mat-button (click)=" onReset()" type="button">Clear</button>
+      <button mat-button type="button" *ngIf="isCreateMode()" color="primary"  mat-flat-button type="submit" (click)="NewViewMethod()" >Submit</button>
+      <button mat-button *ngIf="isUpdateMode()" color="primary"  mat-flat-button type="submit" (click)="NewViewMethod()">Modify</button>
+    </mat-dialog-actions>
+  </form>
+  
+   <mat-menu #settingsMenu="matMenu" xPosition="before" yPosition="below">
+    <button mat-menu-item>
+      <mat-icon svgIcon="mat:print"></mat-icon>
+      <span>Print</span>
+    </button>
+  
+    <button mat-menu-item>
+      <mat-icon svgIcon="mat:download"></mat-icon>
+      <span>Export</span>
+    </button>
+  
+    <button mat-menu-item>
+      <mat-icon svgIcon="mat:delete"></mat-icon>
+      <span>Delete</span>
+    </button>
+  </mat-menu>
+

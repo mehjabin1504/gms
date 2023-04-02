@@ -1,0 +1,51 @@
+<form  [formGroup]="form">
+    <div class="flex items-center" mat-dialog-title>
+
+      <h2 class="headline m-0 flex-auto">Event Entry</h2>  
+      <button class="text-secondary" mat-dialog-close mat-icon-button type="button" (click)="save()" matTooltip="Save">
+        <mat-icon svgIcon="mat:save"></mat-icon>
+      </button>
+      <button class="text-secondary" mat-dialog-close mat-icon-button type="button"  matTooltip="Close">
+        <mat-icon svgIcon="mat:close"></mat-icon>
+      </button>
+    </div>
+  
+    <mat-divider class="-mx-6 text-border"></mat-divider>
+  
+    <mat-dialog-content class="flex flex-col" style="margin-top: 30px;" >
+       
+    
+        <div class="flex flex-col sm:flex-row">
+            <mat-form-field class="flex-auto" appearance="outline">
+                <mat-label>Event ID </mat-label>
+                <input cdkFocusInitial formControlName="eventId" matInput>  
+            </mat-form-field>
+            
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+            <mat-form-field class="flex-auto" appearance="outline">
+                <mat-label>Event Name</mat-label>
+                <input cdkFocusInitial formControlName="eventName" matInput>  
+            </mat-form-field>
+         
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+            <mat-form-field class="flex-auto" appearance="outline">
+                <mat-label>Active Flag</mat-label>
+                <input cdkFocusInitial formControlName="activeFlag" matInput>  
+            </mat-form-field>
+         
+        </div>    
+     
+    </mat-dialog-content>
+  
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close type="button">Cancel</button>
+      <button  mat-button type="button" *ngIf="isCreateMode()" color="primary" (click)="addAppInfo(form.value)" >ADD </button>
+      <button *ngIf="isUpdateMode()" color="primary" mat-flat-button type="submit">Update </button>
+    </mat-dialog-actions>
+
+ 
+</form>
